@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from 'cors'
-import { create, getAll } from "./controllers/GoodController.js";
+import cors from "cors";
+import { create, getAll, getSort } from "./controllers/GoodController.js";
 
 mongoose
   .connect("mongodb+srv://ivanyukandrei:12345@cluster0.qkpybtm.mongodb.net/")
@@ -11,10 +11,11 @@ mongoose
 const app = express();
 
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-app.get("/good/:shop", getAll);
+app.get("/good", getAll);
 app.post("/good", create);
+app.get("/good/:shop", getSort);
 
 app.listen("5555", (err) => {
   if (err) {

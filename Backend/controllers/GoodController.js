@@ -20,11 +20,25 @@ export const create = async (req, res) => {
   }
 };
 
-export const getAll = async (req, res) => {
+export const getSort = async (req, res) => {
   try {
     const store = req.params.shop;
 
     const goods = await GoodModel.find({ shop: store }).exec();
+
+    res.json(goods);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      message: "Не вдалося получити пости",
+    });
+  }
+};
+
+export const getAll = async (req, res) => {
+  try {
+
+    const goods = await GoodModel.find().exec();
 
     res.json(goods);
   } catch (err) {
